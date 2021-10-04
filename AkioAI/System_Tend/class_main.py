@@ -26,24 +26,24 @@ class Race:
                     index = ["a","b","c","d","e","f","g","h","k"])
         
         
-#         トピックのurlを返す
+#トピックのurlを返す
     def get_topic(self):
         return self.race_id_list       
         
         
-#         指定されたコースのurlを返す
+#指定されたコースのurlを返す
     def get_link(self):
         return self.race_id_lists
     
-#     指定されたコースurl更新
+#指定されたコースurl更新
     def set_link(self,changeUrl):
         self.race_id_lists = changeUrl
     
-    
+#  レースのurlリストを返す   
     def get_link_exp(self):
         return self.race_id_lists_exp
     
-    
+# トピックurlを返す    
     def get_url_topic(self):
         return self.url_topic
     
@@ -550,16 +550,26 @@ class Horse:
     #     距離適正を評価       
         if(case == 2):
             try:
+
+                
+
+
                 for cnt_age in range(0,len(data_pre_race),1):
 
                     if (data_pre_race["日付"][cnt_age].startswith(age,0,len(data_pre_race["日付"][cnt_age])) ):
             #             print(cnt_age,"番目")
                         break
 
-            #     print(len(data_pre_race[cnt_age:]))     
+                        
 
 
                 for tmp in range(1,len(data_pre_race[cnt_age:]),1):
+
+
+
+                    # ５試合までしか調べない  
+                    if(point_cnt >5):
+                        continue
 
                     if(data_pre_race["着順"][cnt_age + tmp]!="除" and data_pre_race["着順"][cnt_age + tmp]!="中" and data_pre_race["着順"][cnt_age + tmp]!="取"):
                         if(data_pre_race["レース名"][cnt_age + tmp].endswith('(G', 0, len(data_pre_race["レース名"][cnt_age + tmp])-2) and data_pre_race["距離"][cnt_age + tmp] == self.race.get_ground(0)):
@@ -825,12 +835,19 @@ class Horse:
     #sum調査        
         if(case == 3):
             try: 
+                
+
                 for cnt_age in range(0,len(data_pre_race),1):
                     if (data_pre_race["日付"][cnt_age].startswith(age,0,len(data_pre_race["日付"][cnt_age])) ):
                         break
 
 
                 for tmp in range(1,len(data_pre_race[cnt_age:])-1,1):
+
+                    if(point_cnt > 5):
+                        continue
+
+
                     if(data_pre_race["着順"][cnt_age + tmp]!="除" and data_pre_race["着順"][cnt_age + tmp]!="中" and data_pre_race["着順"][cnt_age + tmp]!="取"):
                         if(data_pre_race["レース名"][cnt_age + tmp].endswith('(G', 0, len(data_pre_race["レース名"][cnt_age + tmp])-2)):
                             point_cnt = point_cnt + 1 
