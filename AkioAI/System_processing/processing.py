@@ -1,0 +1,36 @@
+import pandas as pd
+import random
+import requests
+from tqdm import tqdm as tqdm
+import statsmodels.api as sm
+from sqlalchemy import create_engine
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, f1_score
+from class_processing import Tend
+from class_processing import Result
+
+
+# 競馬場と距離のデータを加工
+print("何処の競馬場？？")
+area = input()
+print("芝 or ダ？？")
+ground = input()
+print("距離は？？")
+meter = input()
+
+ground_file_name = area + ground + meter
+tend_data = Tend(ground_file_name)
+tend_data.createData()
+
+# 結果のデータを加工
+print("resultのファイル名を入力してください")
+result_file_name = input()
+game_data = Result(result_file_name)
+game_data.createData()
+
+
+tend_data.output_data.to_csv("../processing_data/"+ ground_file_name +".csv",encoding="shift_jis")
+game_data.output_data.to_csv("../processing_data/"+ result_file_name +".csv",encoding="shift_jis")
+
