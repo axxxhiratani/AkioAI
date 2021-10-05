@@ -24,13 +24,14 @@ ground_file_name = area + ground + meter
 tend_data = Tend(ground_file_name)
 tend_data.createData()
 
+tend_data.output_data.to_csv("../processing_data/"+ ground_file_name +".csv",encoding="shift_jis")
+
+
 # 結果のデータを加工
 print("resultのファイル名を入力してください")
 result_file_name = input()
 game_data = Result(result_file_name)
 game_data.createData()
 
-
-tend_data.output_data.to_csv("../processing_data/"+ ground_file_name +".csv",encoding="shift_jis")
 game_data.output_data.to_csv("../processing_data/"+ result_file_name +".csv",encoding="shift_jis")
 
