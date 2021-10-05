@@ -33,28 +33,6 @@ class Exp:
         self.infoExp = pd.read_excel("../maxinfo/" + file_name + ".xlsx","sheet2")
         
         
-        self.maxA = self.infoExp["max"][0]
-        self.minA = self.infoExp["min"][0]
-        self.maxB = self.infoExp["max"][1]
-        self.minB = self.infoExp["min"][1]
-        self.maxC = self.infoExp["max"][2]
-        self.minC = self.infoExp["min"][2]
-        self.maxD = self.infoExp["max"][3]
-        self.minD = self.infoExp["min"][3]
-        self.maxE = self.infoExp["max"][4]
-        self.minE = self.infoExp["min"][4]
-        self.maxF = self.infoExp["max"][5]
-        self.minF = self.infoExp["min"][5]
-        self.maxG = self.infoExp["max"][6]
-        self.minG = self.infoExp["min"][6]
-        self.maxH = self.infoExp["max"][7]
-        self.minH = self.infoExp["min"][7]
-        self.maxK = self.infoExp["max"][8]
-        self.minK = self.infoExp["min"][8]
-        
-        
-        
-        
         X_name = ["a","b","c","d","e","f","g","h","k"]
         x = self.df_order[X_name]
         stdsc = StandardScaler()
@@ -77,35 +55,78 @@ class Exp:
         
         for zzz in tqdm(range(0,loopCnt,1)):
 
-            a = 0
-            b = 0
-            c = 0
-            d = 0
-            e = 0
-            f = 0
-            g = 0
-            h = 0
-            k = 0
+            #指数aのセット
+            if(exp_log[0] == 0):
+                a = 0
+            elif(exp_log[0] == 2):
+                a = 1
+            else :
+                a = random.uniform(1,0)
             
-            if(exp_log[0] != 0):
-                a = random.uniform(self.maxA, self.minA)
-            if(exp_log[1] != 0):
-                b = random.uniform(self.maxB, self.minB)
-            if(exp_log[2] != 0):
-                c = random.uniform(self.maxC, self.minC)
-            if(exp_log[3] != 0):
-                d = random.uniform(self.maxD, self.minD)
-            if(exp_log[4] != 0):
-                e = random.uniform(self.maxE, self.minE)
-            if(exp_log[5] != 0):
-                f = random.uniform(self.maxF, self.minF)
-            if(exp_log[6] != 0):
-                g = random.uniform(self.maxG, self.minG)
-            if(exp_log[7] != 0):
-                h = random.uniform(self.maxH, self.minH)
-            if(exp_log[8] != 0):
-                k = random.uniform(self.maxK, self.minK)
-
+            #指数bのセット
+            if(exp_log[1] == 0):
+                b = 0
+            elif(exp_log[1] == 2):
+                b = 1
+            else :
+                b = random.uniform(1,0)
+                
+            #指数cのセット
+            if(exp_log[2] == 0):
+                c = 0
+            elif(exp_log[2] == 2):
+                c = 1
+            else :
+                c = random.uniform(1,0)
+                
+            #指数dのセット
+            if(exp_log[3] == 0):
+                d = 0
+            elif(exp_log[3] == 2):
+                d = 1
+            else :
+                d = random.uniform(1,0)
+                
+            #指数eのセット
+            if(exp_log[4] == 0):
+                e = 0
+            elif(exp_log[4] == 2):
+                e = 1
+            else :
+                e = random.uniform(1,0)
+                
+            #指数fのセット
+            if(exp_log[5] == 0):
+                f = 0
+            elif(exp_log[5] == 2):
+                f = 1
+            else :
+                f = random.uniform(1,0)
+                
+            #指数gのセット
+            if(exp_log[6] == 0):
+                g = 0
+            elif(exp_log[6] == 2):
+                g = 1
+            else :
+                g = random.uniform(1,0)
+                
+            #指数hのセット
+            if(exp_log[7] == 0):
+                h = 0
+            elif(exp_log[7] == 2):
+                h = 1
+            else :
+                h = random.uniform(1,0)
+                
+            #指数kのセット
+            if(exp_log[8] == 0):
+                k = 0
+            elif(exp_log[8] == 2):
+                k = 1
+            else :
+                k = random.uniform(1,0)
+            
                     
             for i in range(0,len(self.df_order),1):
 
@@ -129,20 +150,14 @@ class Exp:
     #指数調整
     #indexは0~7
     #rowはa~b
+    #今は使用しない
     def expChecker(self,row,index):
         
-        if(self.data_exp[row][0] > 0.65):
+        if(self.data_exp[row][0] > 0.8):
             self.infoExp.loc[index,"max"] = 1
+            self.infoExp.loc[index,"min"] = 1
+            
+        elif(self.data_exp[row][0] < 0.1):
+            self.infoExp.loc[index,"max"] = 0
             self.infoExp.loc[index,"min"] = 0
             
-        elif(self.data_exp[row][0] > 0.85):
-            self.infoExp.loc[index,"max"] = 1.5
-            self.infoExp.loc[index,"min"] = 0.5
-            
-        if(self.data_exp[row][0] < -0.1):
-            self.infoExp.loc[index,"max"] = 0.5
-            self.infoExp.loc[index,"min"] = 0
-            
-        elif(self.data_exp[row][0] < -0.5):
-            self.infoExp.loc[index,"max"] = 0
-            self.infoExp.loc[index,"max"] = 0
