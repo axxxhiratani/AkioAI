@@ -148,8 +148,13 @@ class Tend:
                         index = [1])
         
         
-    def getAverageTime(self):
-        return self.averageTime / self.averageTimeCnt
+     def getAverageTime(self):
+        
+        try:
+            return self.averageTime / self.averageTimeCnt
+        except:
+            return 0
+
     
     
     #timeの値をセッティング
