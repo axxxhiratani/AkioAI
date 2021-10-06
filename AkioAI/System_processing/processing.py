@@ -20,18 +20,20 @@ ground = input()
 print("距離は？？")
 meter = input()
 
-ground_file_name = area + ground + meter
-tend_data = Tend(ground_file_name)
+file_name = area + ground + meter
+
+tend_data = Tend(file_name)
 tend_data.createData()
-
-tend_data.output_data.to_csv("../processing_data/"+ ground_file_name +".csv",encoding="shift_jis")
-
+tend_data.createTend()
+tend_data.output_data.to_csv("../processing_data/"+ file_name +".csv",encoding="shift_jis")
+tend_data.index_data.to_csv("../processing_dataTend/"+ file_name +".csv",encoding="shift_jis")
 
 # 結果のデータを加工
 print("resultのファイル名を入力してください")
+print("終了するなら:Enter")
+
 result_file_name = input()
+
 game_data = Result(result_file_name)
 game_data.createData()
-
 game_data.output_data.to_csv("../processing_data/"+ result_file_name +".csv",encoding="shift_jis")
-

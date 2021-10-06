@@ -20,23 +20,23 @@ log_meter= input()
 print("何回回す？？")
 loopCnt = int(input())
 exp_log = []
-print("a=? 0 or 1")
+print("a=? 0 or 1 or 2")
 exp_log.append(int(input()))
-print("b=? 0 or 1")
+print("b=? 0 or 1 or 2")
 exp_log.append(int(input()))
-print("c=? 0 or 1")
+print("c=? 0 or 1 or 2")
 exp_log.append(int(input()))
-print("d=? 0 or 1")
+print("d=? 0 or 1 or 2")
 exp_log.append(int(input()))
-print("e=? 0 or 1")
+print("e=? 0 or 1 or 2")
 exp_log.append(int(input()))
-print("f=? 0 or 1")
+print("f=? 0 or 1 or 2")
 exp_log.append(int(input()))
-print("g=? 0 or 1")
+print("g=? 0 or 1 or 2")
 exp_log.append(int(input()))
-print("h=? 0 or 1")
+print("h=? 0 or 1 or 2")
 exp_log.append(int(input()))
-print("k=? 0 or 1")
+print("k=? 0 or 1 or 2")
 exp_log.append(int(input()))
 
 
@@ -48,14 +48,13 @@ if(main.data_max["max"][0] < main.getMaxInfo()):
     print("更新")
     main.data_max.loc[0,"max"] = main.getMaxInfo()
     
-    
-    loopExp = ["a","b","c","d","e","f","g","h","k"]
-    loopNum = [0,1,2,3,4,5,6,7,8]
-    
-    for i, j in zip(loopExp,loopNum):
-        main.expChecker(i,j)
-    
-    
+
+#次回の指数を調整
+# 今は使わない
+#     loopExp = ["a","b","c","d","e","f","g","h","k"]
+#     loopNum = [0,1,2,3,4,5,6,7,8]
+#     for i, j in zip(loopExp,loopNum):
+#         main.expChecker(i,j)
     
     with pd.ExcelWriter("../race_exp_result/"+ name + log_ground + log_meter +".xlsx") as writer:
         main.data_exp.to_excel(writer, sheet_name='sheet1')
