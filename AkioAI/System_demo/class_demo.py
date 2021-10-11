@@ -208,6 +208,7 @@ class Race:
         self.popData1 = []
         self.popData2 = []
         self.popData3 = []
+        self.popData4 = []
         
         
     #トピックのurlを返す
@@ -312,21 +313,34 @@ class Race:
         popSum1 = 0
         popSum2 = 0
         popSum3 = 0
+        popSum4 = 0
+        popSum5 = 0
+        popSum6 = 0
+        
         data = pd.read_html(url,header=0)[0]
         for x,y in zip(data['着順'],data['人気']):
             
             try:
                 if(int(x) <= 1):
                     popSum1 = popSum1 + int(y)
+                    popSum4 = popSum4 + int(y)
+                    popSum5 = popSum5 + int(y)
 
                 if(int(x) <= 2):
                     popSum2 = popSum2 + int(y)
+                    popSum4 = popSum4 + int(y)
+                    popSum6 = popSum6 + int(y)
 
                 if(int(x) <= 3):
                     popSum3 = popSum3 + int(y)
+                    popSum5 = popSum5 + int(y)
+                    popSum6 = popSum6 + int(y)
             except:
                 continue
                 
         self.popData1.append(popSum1)
         self.popData2.append(popSum2)
         self.popData3.append(popSum3)
+        self.popData4.append(popSum4)
+        self.popData4.append(popSum5)
+        self.popData4.append(popSum6)

@@ -36,9 +36,6 @@ hourse_num = int(input())
 race = Race(url_topic)
 race.getURLTopic()
 
-
-# In[72]:
-
 #入力された年分だけにする
 for exp in range(0,cntTopic,1):
     race.createBuyRank(race.get_topic()[exp])
@@ -48,8 +45,6 @@ demo = Demo(name,log_ground,log_meter)
 for i in range(1,hourse_num+1,1):
     demo.createDemo(i)
 demo.createExpect(race)
-
-# In[83]:
 
 
 with pd.ExcelWriter("../race_demo/"+ name + log_ground + log_meter +".xlsx") as writer:
@@ -64,13 +59,13 @@ for i in range(0,20,1):
     race.getPopSum(urls[i])
     
 # 点数のタプル
-points = (race.popData1,race.popData2,race.popData3)
+points = (race.popData1,race.popData2,race.popData3,race.popData4)
 
 # 箱ひげ図
 fig, ax = plt.subplots()
 
 bp = ax.boxplot(points)
-ax.set_xticklabels(['単', '連','複'])
+ax.set_xticklabels(['one', 'two','three','wide'])
 
 plt.title('Box plot')
 plt.xlabel('kinds')
