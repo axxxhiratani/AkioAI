@@ -32,7 +32,8 @@ tend_data.index_data.to_csv("../processing_dataTend/"+ file_name +".csv",encodin
 print("resultのファイル名を入力してください")
 print("終了するなら:Enter")
 
+result_file_name = input()
+
 game_data = Result(result_file_name)
 game_data.createData()
 game_data.output_data.to_csv("../processing_data/"+ result_file_name +".csv",encoding="shift_jis")
-
