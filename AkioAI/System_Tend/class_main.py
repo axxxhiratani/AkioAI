@@ -148,8 +148,7 @@ class Tend:
                         index = [1])
         
         
-     def getAverageTime(self):
-        
+    def getAverageTime(self):
         try:
             return self.averageTime / self.averageTimeCnt
         except:
@@ -165,12 +164,14 @@ class Tend:
 
     def create_tend(self,race_id_lists):
         
-        for i in (range(0,len(race_id_lists),1)):
+        for i in tqdm(range(0,len(race_id_lists),1)):
 
             try:
                 url = race_id_lists[i]
+                
                 dfs = pd.read_html(url)[0]
                 data = pd.read_html(url,header=0)[0]
+                
                 response = requests.get(url)
                 soup = BeautifulSoup(response.text, 'html.parser')
                 table = soup.find('table')
@@ -187,7 +188,6 @@ class Tend:
                     except:
                         pass
                 data['HorseLink'] = links  
-                
                 #日時の保存
                 response = requests.get(url)
                 response.encoding = "EUC-JP"
@@ -197,32 +197,47 @@ class Tend:
                 z =str(li)
                 z = z[55:59] + "/" + z[60:62] + "/" + z[63:65]
 
-
     #血統と前走を保存
                 blood_1 = []
                 blood_2 = []
                 prev_game = []
                 for x in data['HorseLink']:
+                    
                     blood = pd.read_html(x)[2]
                     blood_1.append(blood[0][0])
                     blood_2.append(blood[1][2])
                     
-                    game = pd.read_html(x)[3]
-                    for cnt_age in range(0,len(game),1):
+                    
+                    try:
+                        game = pd.read_html(x)[3]
 
-                        if (game["日付"][cnt_age].startswith(z,0,len(game["日付"][cnt_age])) ):
-                            break
+
+                        for cnt_age in range(0,len(game),1):
+
+                            if (game["日付"][cnt_age].startswith(z,0,len(game["日付"][cnt_age])) ):
+                                break
+
+                        prev_game.append(game["レース名"][cnt_age+1])
                         
-                    prev_game.append(game["レース名"][cnt_age+1])
+                    except:
+                        game = pd.read_html(x)[4]
+
+                        for cnt_age in range(0,len(game),1):
+
+                            if (game["日付"][cnt_age].startswith(z,0,len(game["日付"][cnt_age])) ):
+                                break
+
+                        prev_game.append(game["レース名"][cnt_age+1])
+                        
                     
-                    
+                
                 data['blood_1'] = blood_1
                 data['blood_2'] = blood_2
                 data['前走大会'] = prev_game
+                
 
             except:
                 continue
-                
                 
             for x,y,z,n,p,j,un,bl_1,bl_2,pg,tm in zip(data['着順'],data['枠番'],data['馬名'],data['性齢'],data["人気"],data['騎手'],data['馬番'],data['blood_1'],data['blood_2'],data['前走大会'],data['タイム']):
                 try:
@@ -358,7 +373,7 @@ class Tend:
                 except:
                     continue
 
-
+                
 
 
         for i,j in zip(self.data_jockey["cnt"],self.data_jockey["name"]):
