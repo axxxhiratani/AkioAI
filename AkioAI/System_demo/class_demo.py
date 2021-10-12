@@ -318,29 +318,40 @@ class Race:
         popSum6 = 0
         
         data = pd.read_html(url,header=0)[0]
-        for x,y in zip(data['着順'],data['人気']):
-            
-            try:
-                if(int(x) <= 1):
-                    popSum1 = popSum1 + int(y)
-                    popSum4 = popSum4 + int(y)
-                    popSum5 = popSum5 + int(y)
+        cnt = 0
+        try:
+            for x,y in zip(data['着順'],data['人気']):
+    
+                if(cnt >= 3):
+                    continue
 
-                if(int(x) <= 2):
+                if(int(x) == 1):
+                    popSum1 = popSum1 + int(y)
                     popSum2 = popSum2 + int(y)
+                    popSum3 = popSum3 + int(y)
                     popSum4 = popSum4 + int(y)
                     popSum6 = popSum6 + int(y)
 
-                if(int(x) <= 3):
+                if(int(x) == 2):
+                    popSum2 = popSum2 + int(y)
+                    popSum3 = popSum3 + int(y)
+                    popSum4 = popSum4 + int(y)
+                    popSum5 = popSum5 + int(y)
+
+                if(int(x) == 3):
                     popSum3 = popSum3 + int(y)
                     popSum5 = popSum5 + int(y)
                     popSum6 = popSum6 + int(y)
-            except:
-                continue
-                
-        self.popData1.append(popSum1)
-        self.popData2.append(popSum2)
-        self.popData3.append(popSum3)
-        self.popData4.append(popSum4)
-        self.popData4.append(popSum5)
-        self.popData4.append(popSum6)
+                    
+                cnt = cnt + 1
+                        
+            print(popSum4,popSum5,popSum6)
+            self.popData1.append(popSum1)
+            self.popData2.append(popSum2)
+            self.popData3.append(popSum3)
+            self.popData4.append(popSum4)
+            self.popData4.append(popSum5)
+            self.popData4.append(popSum6)
+                    
+        except:
+            print("err")
