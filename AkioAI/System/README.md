@@ -1,4 +1,4 @@
-#AkioAI
+# AkioAI
 
 ## 1.アプリ概要
 
