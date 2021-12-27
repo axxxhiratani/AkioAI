@@ -24,11 +24,11 @@ AkioAI は、web スクレイピングと重回帰分析を使用した競馬予
 
 ## 4.アプリ構造
 
-1.  main.py  
+1.  main.py(class_main.py)  
     [netkeiba.com](https://www.netkeiba.com/?rf=navi)から過去のレースデータを、web スクレイピングします。
-2.  processing.py kaiki.py  
+2.  processing.py(class_processing.py), kaiki.py(class_exp.py)  
     スクレイピングしたデータを標準化し、重回帰分析を行います。
-3.  demo.py  
+3.  demo.py(class_demo.py)  
     分析結果を基に、デモンストレーションを実施します。
-4.  output.py  
+4.  output.py(class_output.py)  
     実際に行われるレースの予想を行います。
