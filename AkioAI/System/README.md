@@ -4,6 +4,8 @@
 
 AkioAI は、web スクレイピングと重回帰分析を使用した競馬予想をするシステムです。予想した結果を Instagram で発信しています。
 
+URL:https://www.instagram.com/horse.ai.output/
+
 ## 2.使用技術
 
 - 使用言語
